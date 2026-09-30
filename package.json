@@ -1,0 +1,30 @@
+{
+  "name": "stream-startup-dashboard",
+  "version": "1.0.0",
+  "description": "Standalone launcher that starts your stream setup in the order you define, with real verification that each app actually opened.",
+  "main": "main.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.streamdash.app",
+    "productName": "Stream Startup Dashboard",
+    "win": {
+      "target": "portable",
+      "icon": "build/icon.ico"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "items.default.json"
+    ]
+  }
+}

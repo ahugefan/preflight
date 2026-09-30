@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stream Startup Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar-heading">
+        <h1>Preflight</h1>
+        <p class="subhead">Your stream startup sequence</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="addItemBtn" class="btn btn-ghost">+ Add item</button>
+        <button id="startBtn" class="btn btn-primary">Start stream</button>
+      </div>
+    </header>
+
+    <div class="run-summary" id="runSummary" hidden>
+      <div class="run-summary-bar">
+        <div class="run-summary-fill" id="runSummaryFill"></div>
+      </div>
+      <div class="run-summary-text">
+        <span id="runSummaryText">Idle</span>
+        <button id="cancelBtn" class="btn btn-text">Cancel</button>
+      </div>
+    </div>
+
+    <main class="list" id="itemList"></main>
+
+    <p class="empty-hint" id="emptyHint" hidden>Nothing here yet. Add the first thing you launch when you go live.</p>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal">
+      <h2 id="modalTitle">Add item</h2>
+
+      <label class="field">
+        <span>Name</span>
+        <input type="text" id="fName" placeholder="e.g. Discord" />
+      </label>
+
+      <label class="field">
+        <span>What is this?</span>
+        <select id="fType">
+          <option value="exe">An application (.exe)</option>
+          <option value="command">A custom command (e.g. a script)</option>
+          <option value="url">A website / link</option>
+        </select>
+      </label>
+
+      <div id="fieldsExe" class="type-fields">
+        <label class="field">
+          <span>Program path</span>
+          <div class="row">
+            <input type="text" id="fPath" placeholder="C:\Program Files\..." />
+            <button id="browseExeBtn" class="btn btn-ghost btn-small">Browse</button>
+          </div>
+        </label>
+        <label class="field">
+          <span>Launch arguments (optional)</span>
+          <input type="text" id="fArgs" placeholder="--minimized" />
+        </label>
+        <label class="field">
+          <span>Process name to verify against (optional — guessed from path)</span>
+          <input type="text" id="fProcessName" placeholder="firefox.exe" />
+        </label>
+      </div>
+
+      <div id="fieldsCommand" class="type-fields" hidden>
+        <label class="field">
+          <span>Command</span>
+          <input type="text" id="fCommand" placeholder="node my-script.js" />
+        </label>
+        <label class="field">
+          <span>Working directory</span>
+          <div class="row">
+            <input type="text" id="fCwd" placeholder="C:\path\to\project" />
+            <button id="browseCwdBtn" class="btn btn-ghost btn-small">Browse</button>
+          </div>
+        </label>
+        <label class="field">
+          <span>Text to look for in the running process (to verify it started)</span>
+          <input type="text" id="fProcessMatch" placeholder="my-script.js" />
+        </label>
+      </div>
+
+      <div id="fieldsUrl" class="type-fields" hidden>
+        <label class="field">
+          <span>URL</span>
+          <input type="text" id="fUrl" placeholder="https://twitch.tv/dashboard" />
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Timing</span>
+        <select id="fMode">
+          <option value="first">Run first</option>
+          <option value="normal" selected>Normal order</option>
+          <option value="wait">Wait until open, then continue</option>
+          <option value="last">Run last</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Verification timeout (seconds)</span>
+        <input type="number" id="fTimeout" value="15" min="3" max="120" />
+      </label>
+
+      <div class="modal-actions">
+        <button id="deleteItemBtn" class="btn btn-danger" hidden>Remove</button>
+        <div class="spacer"></div>
+        <button id="cancelModalBtn" class="btn btn-ghost">Cancel</button>
+        <button id="saveItemBtn" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

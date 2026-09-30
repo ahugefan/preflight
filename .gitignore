@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out/
+
+# Secrets and local config
+.env
+.env.*
+*.pem
+*.key
+
+# Your own saved list (lives in %APPDATA%, but just in case it gets copied here)
+items.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor files
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Backup files
+*.bak
